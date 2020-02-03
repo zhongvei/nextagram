@@ -1,11 +1,10 @@
-import react from 'react';
+import React from 'react';
+import Loader from './loading.gif';
 
-const loading = () => {
+const Loading = () => {
     return (
-        <div>
-            <img src="./Radio " ></img>
-        </div>
-    )
-}
+        <image src={Loader}></image>
+    );
+};
 
-export default loading;
+export default Loading;
