@@ -1,11 +1,10 @@
 import React from 'react';
-import Loader from '';
+import Rolling from './rolling.gif';
 
 const Loading = () => {
     return (
-        <div>
-            <p>hrllo</p>
-            <image src={Loader}></image>
+        <div className="loading">
+            <img src={Rolling}></img>
         </div>
     );
 };

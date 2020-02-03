@@ -1,3 +1,54 @@
-image {
-  border: black;
+#root {
+  background-color: rgba(0, 0, 0, 0.582);
+}
+
+.containerStyle {
+  padding: 0px;
+}
+
+.loading {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.biggerBox {
+  align-items: center;
+  margin: 10px;
+  border: 2px solid pink;
+  border-radius: 25px;
+}
+
+.contentImageBox {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:flex-start;
+  padding: 10px;
+}
+
+.contentImage {
+  display: block;
+  height: 200px;
+  width: 200px;
+  margin: 6px;
+}
+
+.contentImage:hover{
+  transform: scale(1.05,1.05);
+  box-shadow: 5px 4.5px rgba(0, 0, 0, 0.65) ;
+}
+
+.profileImage {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
 }
