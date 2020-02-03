@@ -1,9 +1,12 @@
 import React from 'react';
-import Loader from './loading.gif';
+import Loader from '';
 
 const Loading = () => {
     return (
-        <image src={Loader}></image>
+        <div>
+            <p>hrllo</p>
+            <image src={Loader}></image>
+        </div>
     );
 };
 
