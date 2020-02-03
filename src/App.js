@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Media } from 'react-bootstrap';
 import './App.css';
 
 
@@ -9,12 +9,13 @@ import './App.css';
 function App() {
 
   const [users, setUsers] = useState([])
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     axios.get('https://insta.nextacademy.com/api/v1/users')
       .then(result => {
+        console.log(result.data)
         setUsers([...result.data]);
-        console.log(users)
       })
       .catch(error => {
         console.log('ERROR: ', error)
@@ -22,12 +23,22 @@ function App() {
   }, [])
 
   return (
-    < Container fluid >
+    <Container fluid>
       {users.map(user => (
-        <Row>
-          <Col sm={12} key={user.id}>
-            <Image src={user.profileImage} roundedCircle style={{ width: "20%" }} />
-          </Col>
+        <Row key={user.id}>
+          <Media as="li">
+            <img
+              width={200}
+              height={200}
+              className="mr-3"
+              src={user.profileImage}
+              alt="Generic placeholder"
+            />
+            <Media.Body>
+              <h5>{user.username}</h5>
+            </Media.Body>
+          </Media>
+
         </Row>
       ))}
     </Container >
