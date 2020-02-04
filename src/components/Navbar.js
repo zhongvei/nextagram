@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar } from 'react-bootstrap';
+import logo from './nextagram.png';
 
 
 const Navybar = () => {
@@ -8,7 +9,7 @@ const Navybar = () => {
             <Navbar.Brand href="#home">
                 <img
                     alt=""
-                    src="./nextagram.png"
+                    src={logo}
                     width="30"
                     height="30"
                     className="d-inline-block align-top"
