@@ -1,5 +1,6 @@
 html {
   background-color: rgba(0, 0, 0, 0.582);
+  font-family: 'Crimson Text', serif;
 }
 
 #root {
@@ -84,4 +85,17 @@ html {
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+}
+
+.Link {
+  color: black;
+  font-size: 5em;
+}
+
+.Link:hover {
+  color: darkblue
+}
+
+.username {
+  font-size: 4em;
 }

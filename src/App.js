@@ -24,15 +24,12 @@ function App() {
   }, [])
 
   return (
-    <>
-      <Navybar />
-      {isLoading ? <Loading /> :
-        <>
-          <Route exact path="/" component={() => <MainPage users={users} />} />
-          <Route path="/User/:id" component={() => <UserProfilePage users={users} />} />
-        </>
-      }
-    </>
+    isLoading ? <Loading /> :
+      <>
+        <Navybar />
+        <Route exact path="/" component={() => <MainPage users={users} />} />
+        <Route path="/User/:id" component={() => <UserProfilePage users={users} />} />
+      </>
   );
 };
 

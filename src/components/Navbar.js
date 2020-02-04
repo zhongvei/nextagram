@@ -9,7 +9,7 @@ const Navybar = () => {
     return (
         <>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand as={Link} to="/">
                     <img
                         alt=""
                         src={logo}

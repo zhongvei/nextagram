@@ -1,10 +1,14 @@
 import React from 'react';
-import Rolling from './rolling.gif';
+import { Spinner } from 'react-bootstrap';
 
 const Loading = () => {
     return (
         <div className="loading">
-            <img src={Rolling}></img>
+            <Spinner animation="grow" variant="dark" />
+            <Spinner animation="grow" variant="dark" />
+            <Spinner animation="grow" variant="dark" />
+            <Spinner animation="grow" variant="dark" />
+            <Spinner animation="grow" variant="dark" />
         </div>
     );
 };

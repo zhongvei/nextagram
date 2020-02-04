@@ -2,6 +2,8 @@ import React from 'react';
 import { Row, Media, Container } from 'react-bootstrap';
 import UserImages from './UserImages'
 import { Link } from 'react-router-dom';
+
+
 const MainPage = ({ users }) => {
     return (
         <Container fluid style={{ padding: "0px" }}>
@@ -17,7 +19,7 @@ const MainPage = ({ users }) => {
                                     alt="Generic placeholder"
                                     className="round"
                                 />
-                                <Link to={`/User/${user.id}`} >{user.username}</Link>
+                                <Link to={`/User/${user.id}`} className="Link" >{user.username}</Link>
                             </div>
 
                             <Media.Body>
