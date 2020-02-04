@@ -1,3 +1,7 @@
+html {
+  background-color: rgba(0, 0, 0, 0.582);
+}
+
 #root {
   background-color: rgba(0, 0, 0, 0.582);
 }
@@ -51,4 +55,33 @@
   align-items: center;
   justify-content: center;
   padding: 7px;
+}
+
+.profileImage {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+}
+
+.biggerBox1 {
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  border-radius: 25px;
+}
+
+
+.masonry { 
+  column-count: 4;
+  column-gap: 1em;
+}
+
+.item { 
+  background-color: #eee;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
 }

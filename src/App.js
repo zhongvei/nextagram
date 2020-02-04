@@ -2,10 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Loading from './components/Loading.js';
 import './App.css';
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import MainPage from './components/Mainpage.js';
 import Navybar from './components/Navbar.js';
-import UserProfilePage from './components/User';
+import UserProfilePage from './components/UserProfilePage';
 
 function App() {
 
@@ -15,7 +15,6 @@ function App() {
   useEffect(() => {
     axios.get('https://insta.nextacademy.com/api/v1/users')
       .then(result => {
-        console.log(result.data);
         setUsers([...result.data]);
         setisLoading(false);
       })
@@ -30,7 +29,7 @@ function App() {
       {isLoading ? <Loading /> :
         <>
           <Route exact path="/" component={() => <MainPage users={users} />} />
-          <Route path="/User/:id" component={UserProfilePage} />
+          <Route path="/User/:id" component={() => <UserProfilePage users={users} />} />
         </>
       }
     </>

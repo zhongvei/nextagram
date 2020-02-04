@@ -16,11 +16,10 @@ const UserImages = ({ userId }) => {
             })
     }, [])
 
-    console.log(images)
     return (
         <div className="contentImageBox">
             {images.map((image, index) => (
-                <div>
+                <div key={index} >
                     <Image
                         src={image}
                         alt={index}
