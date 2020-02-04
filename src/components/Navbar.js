@@ -5,8 +5,8 @@ import logo from './nextagram.png';
 
 const Navybar = () => {
     return (
-        <Navbar bg="dark" variant="dark" style={{ position: "fixed", width: "100%" }}>
-            <Navbar.Brand href="#home">
+        <Navbar bg="dark" variant="dark" style={{ position: "fixed", width: "100%" }} >
+            <Navbar.Brand href="#home" style={{ display: "flex", alignItems: "center", flexDirection: "flex-start" }}>
                 <img
                     alt=""
                     src={logo}
@@ -16,7 +16,7 @@ const Navybar = () => {
                 />{' '}
                 Nextagram
             </Navbar.Brand>
-        </Navbar>
+        </Navbar >
     );
 };
 

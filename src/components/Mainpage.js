@@ -4,7 +4,7 @@ import UserImages from './UserImages'
 
 const MainPage = ({ users }) => {
     return (
-        <Container className="firstContainer">
+        <Container className="firstContainer mansonry">
             {users.map(user => (
                 <Row key={user.id} style={{ margin: "0px" }}>
                     <Media as="div" style={{ width: "100%" }} className="biggerBox">
