@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
 import Loading from './components/Loading.js';
 import './App.css';
+import { Route, Link } from "react-router-dom";
 import MainPage from './components/Mainpage.js';
 import Navybar from './components/Navbar.js';
+import UserProfilePage from './components/User';
 
 function App() {
 
@@ -24,11 +25,15 @@ function App() {
   }, [])
 
   return (
-    <Container fluid style={{ padding: "0px" }}>
+    <>
       <Navybar />
-      {isLoading ? <Loading /> : <MainPage users={users} />};
-    </Container >
-
+      {isLoading ? <Loading /> :
+        <>
+          <Route exact path="/" component={() => <MainPage users={users} />} />
+          <Route path="/User/:id" component={UserProfilePage} />
+        </>
+      }
+    </>
   );
 };
 
