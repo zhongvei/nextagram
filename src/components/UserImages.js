@@ -25,13 +25,18 @@ const UserImages = ({ userId }) => {
                 <>
                     <div className="contentImageBox">
                         {images.map((image, index) => (
-                            <div key={index} >
-                                <Image
-                                    src={image}
-                                    alt={index}
-                                    className="contentImage"
-                                />
-                            </div>
+                            <>
+                                <div key={index} >
+                                    <Image
+                                        src={image}
+                                        alt={index}
+                                        className="contentImage"
+                                    />
+                                </div>
+                                <div>
+
+                                </div>
+                            </>
                         ))
                         }
                     </div>
