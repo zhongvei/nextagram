@@ -75,9 +75,7 @@ const Signup = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <div>
-                        <Login />
-                    </div>
+                    <Login />
                 </Modal.Footer>
             </Modal>
         </>

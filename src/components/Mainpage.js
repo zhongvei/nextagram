@@ -9,7 +9,7 @@ const MainPage = ({ users }) => {
         <Container fluid style={{ padding: "0px" }}>
             <Container className="firstContainer mansonry">
                 {users.map(user => (
-                    <Row key={user.id} style={{ margin: "0px" }}>
+                    <Row key={user.id} style={{ margin: "0px", width: "100%" }}>
                         <Media as="div" style={{ width: "100%" }} className="biggerBox">
                             <div className="profileImage">
                                 <img

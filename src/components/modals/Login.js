@@ -65,7 +65,6 @@ const Login = () => {
                         Close
                     </Button>
                     <Signup>
-                        {handleClose}
                     </Signup>
                 </Modal.Footer>
             </Modal>
