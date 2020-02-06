@@ -10,6 +10,10 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passLength, setPassLength] = useState(false);
+    const [click, setClick] = useState(false)
+    const [error, setError] = useState([])
+    const handleClick = () => setClick(true)
+    const handleClicked = () => setClick(false)
     const handlePasswordTrue = () => setPassLength(true);
     const handlePasswordFalse = () => setPassLength(false);
     const handleClose = () => setShow(false);
@@ -25,10 +29,7 @@ const Signup = () => {
         display(e)
         setEmail(e.target.value)
     }
-    const handleUsername = (e) => {
-        display(e)
-        setUsername(e.target.value)
-    }
+
 
     useEffect(() => {
         console.log(passLength)
@@ -45,23 +46,40 @@ const Signup = () => {
         }
     }
 
+    const [delay, setDelay] = useState(null);
+    const [usernameValid, setUsernameValid] = useState(true);
 
-    axios({
-        method: 'POST',
-        url: 'https://insta.nextacademy.com/api/v1/users/',
-        data: {
-            username: username,
-            email: email,
-            password: ""
-        }
-    })
-        .then(response => {
-            console.log(response)
-        })
-        .catch(error => {
-            console.log(error.response.data)
-        })
+    const handleUsername = (e) => {
+        display(e)
+        setUsername(e.target.value)
+        handleUsernameInput(e)
+    }
 
+    const checkUsername = (newUsername) => {
+        axios
+            .get(
+                `https://insta.nextacademy.com/api/v1/users/check_name?username=${newUsername}`
+            )
+            .then(response => {
+                console.log(response.data);
+                if (response.data.valid) {
+                    setUsernameValid(true);
+                } else {
+                    setUsernameValid(false);
+                }
+            });
+    };
+
+    const handleUsernameInput = e => {
+        clearTimeout(delay);
+        const newUsername = e.target.value;
+        setUsername(newUsername);
+        const newDelay = setTimeout(() => {
+            checkUsername(newUsername);
+        }, 500);
+
+        setDelay(newDelay);
+    };
 
 
     const displaySubmit = (e) => {
@@ -97,12 +115,30 @@ const Signup = () => {
                     <Form>
                         <Form.Group controlId="formBasicUsername">
                             <Form.Label >Username</Form.Label>
-                            <Form.Control type="text" placeholder="Enter username" onChange={handleUsername} />
-                        </Form.Group>
+                            <Form.Control type="text" placeholder="Enter username" onChange={handleUsername} onFocus={handleClick} onBlur={handleClicked} />
+                            {click ?
+                                passLength ? <></> : <>
+                                    {username == "" ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
+                                        username.length < 5 ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
+                                            <> {usernameValid ? <Form.Text style={{ fontSize: "2em" }}>
+                                                Username Valid!</Form.Text> : <Form.Text style={{ fontSize: "2em" }}>
+                                                    Username Invalid!</Form.Text>
+                                            }</>}
+                                </> :
+                                <></>
+                            }
 
+
+
+                        </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} />
+                            <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} onFocus={handleClick} onBlur={handleClicked} />
+                            {click ?
+                                passLength ? <></> : <Form.Text className="text-muted">
+                                    error</Form.Text> :
+                                <></>
+                            }
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -110,10 +146,12 @@ const Signup = () => {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" onChange={handlePassword} />
-                            {passLength ? <></> : <Form.Text className="text-muted">
-                                Password Too Short
-                            </Form.Text>}
+                            <Form.Control type="password" placeholder="Password" onChange={handlePassword} onFocus={handleClick} onBlur={handleClicked} />
+                            {click ?
+                                passLength ? <></> : <Form.Text className="text-muted">
+                                    Password Too Short</Form.Text> :
+                                <></>
+                            }
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />
