@@ -101,6 +101,10 @@ html {
   font-size: 4em;
 }
 
+.space {
+  margin-right: 5px;
+}
+
 .modal {
   display: none;
   position: fixed;

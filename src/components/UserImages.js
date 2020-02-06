@@ -33,9 +33,6 @@ const UserImages = ({ userId }) => {
                                         className="contentImage"
                                     />
                                 </div>
-                                <div>
-
-                                </div>
                             </>
                         ))
                         }

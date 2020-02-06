@@ -1,11 +1,14 @@
 import React from "react";
-import { Navbar, NavDropdown, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, NavDropdown, Nav, Form } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import logo from './nextagram.png';
+import Login from './modals/Login'
+import Signup from './modals/Signup'
 
 
 
 const Navybar = () => {
+
     return (
         <>
             <Navbar bg="dark" variant="dark">
@@ -33,9 +36,10 @@ const Navybar = () => {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                        <Login />
+                        <Signup />
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
