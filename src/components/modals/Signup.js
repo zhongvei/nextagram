@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 import Login from "./Login";
 
 const Signup = () => {
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [passLength, setPassLength] = useState(false);
+    const handlePasswordTrue = () => setPassLength(true);
+    const handlePasswordFalse = () => setPassLength(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
 
     const display = (e) => {
         console.log(e.target.value)
@@ -24,15 +29,59 @@ const Signup = () => {
         display(e)
         setUsername(e.target.value)
     }
+
+    useEffect(() => {
+        console.log(passLength)
+    }, [passLength]);
+
+
     const handlePassword = (e) => {
         display(e)
         setPassword(e.target.value)
+        if (e.target.value.length >= 8) {
+            handlePasswordTrue()
+        } else if (e.target.value.length < 8) {
+            handlePasswordFalse()
+        }
     }
+
+
+    axios({
+        method: 'POST',
+        url: 'https://insta.nextacademy.com/api/v1/users/',
+        data: {
+            username: username,
+            email: email,
+            password: ""
+        }
+    })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error.response.data)
+        })
+
 
 
     const displaySubmit = (e) => {
         e.preventDefault()
         console.log(`Submitted Username:${username} ,Submitted Email:${email} ,with password: ${password}`)
+        axios({
+            method: 'POST',
+            url: 'https://insta.nextacademy.com/api/v1/users/',
+            data: {
+                username: username,
+                email: email,
+                password: password
+            }
+        })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.error(error.response)
+            })
     }
 
     return (
@@ -62,6 +111,9 @@ const Signup = () => {
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={handlePassword} />
+                            {passLength ? <></> : <Form.Text className="text-muted">
+                                Password Too Short
+                            </Form.Text>}
                         </Form.Group>
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />
