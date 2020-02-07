@@ -1,60 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 import Signup from './Signup';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom'
 
-
-const Login = () => {
-    let history = useHistory()
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-    const display = (e) => {
-        console.log(e.target.value)
-    }
-
-    const handleUsername = (e) => {
-        display(e)
-        setUsername(e.target.value)
-    }
-    const handlePassword = (e) => {
-        display(e)
-        setPassword(e.target.value)
-    }
-
-    const displaySubmit = (e) => {
-        e.preventDefault()
-        console.log(`Submitted username:${username} ,with password: ${password}`)
-        axios({
-            method: 'post',
-            url: 'https://insta.nextacademy.com/api/v1/login',
-            data: {
-                username: username,
-                password: password
-            }
-        })
-            .then(result => {
-                console.log(result)
-                toast.success("Logged in successfully!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true
-                });
-                localStorage.setItem('jwt', result.data.auth_token)
-                localStorage.getItem('jwt')
-                history.push(`/User/${result.data.user.id}`)
-            })
-    }
-
+const Login = ({ displaySubmit, show, handleClose, handleShow, handleUsername, handlePassword }) => {
 
     return (
         <>

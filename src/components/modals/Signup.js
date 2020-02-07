@@ -84,16 +84,12 @@ const Signup = () => {
         setDelay(newDelay);
     };
 
-
     const checkEmail = () => {
         console.log("hi")
         if (errorEmail != []) {
             setErrorMsg(errorEmail[0])
         }
     }
-
-
-
 
     const displaySubmit = (e) => {
         e.preventDefault()

@@ -1,31 +1,11 @@
-import React, { useState, useEffect } from "react";
+import react from "react";
 import { Navbar, NavDropdown, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import logo from './nextagram.png';
 import Login from './modals/Login'
-import { useHistory } from 'react-router-dom'
 import Signup from './modals/Signup'
 
-
-
-const Navybar = () => {
-    const state = () => localStorage.getItem('jwt') !== null;
-    const [loggedIn, setLoggedIn] = useState(state())
-    const [click, setCLick] = useState(false)
-
-    let history = useHistory()
-
-    const loggedOut = () => {
-        localStorage.removeItem('jwt')
-        setCLick(true);
-        history.push('/')
-    }
-
-    useEffect(() => {
-        state()
-    }, [click])
-
-
+const Navybar = ({ displaySubmit, loggedOut, handlePassword, handleUsername, handleShow, handleClose, show, loggedIn }) => {
 
     return (
         <>
@@ -59,7 +39,7 @@ const Navybar = () => {
                         {loggedIn ? <Button variant="secondary" onClick={loggedOut}>
                             Sign Out</Button> :
                             <>
-                                <Login />
+                                <Login displaySubmit={displaySubmit} show={show} handleClose={handleClose} handleShow={handleShow} handleUsername={handleUsername} handlePassword={handlePassword} />
                                 <Signup />
                             </>}
                     </Form>
