@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import { Navbar, NavDropdown, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import logo from './nextagram.png';

@@ -22,8 +22,6 @@ const Signup = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
-
     const display = (e) => {
         console.log(e.target.value)
     }

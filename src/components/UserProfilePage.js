@@ -4,6 +4,7 @@ import Image from "react-graceful-image";
 import { useParams } from 'react-router-dom';
 import { Row, Container, Media, Col } from 'react-bootstrap';
 import Loading from './Loading.js'
+import MyProfilePage from './modals/MyProfilePage'
 
 const UserProfilePage = () => {
     let { id } = useParams();
@@ -27,8 +28,6 @@ const UserProfilePage = () => {
                 console.log('ERROR: ', error)
             })
     }, [])
-
-    console.log(users)
 
     return (
         isLoading ? <Loading /> :
@@ -64,6 +63,9 @@ const UserProfilePage = () => {
                             </div>
                         </Col>
                     </Row>
+                </Container>
+                <Container>
+                    <MyProfilePage />
                 </Container>
             </>
 
