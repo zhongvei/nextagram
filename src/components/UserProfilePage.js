@@ -27,7 +27,7 @@ const UserProfilePage = () => {
             .catch(error => {
                 console.log('ERROR: ', error)
             })
-    }, [])
+    })
 
     return (
         isLoading ? <Loading /> :

@@ -15,7 +15,7 @@ function App() {
 
   const [users, setUsers] = useState([])
   const [isLoading, setisLoading] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt') !== null)
   const handleLogIn = () => setLoggedIn(true)
   const handleLogOut = () => setLoggedIn(false)
   const [username, setUsername] = useState('');

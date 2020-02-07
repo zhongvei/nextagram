@@ -17,7 +17,7 @@ const UserImages = ({ userId }) => {
             .catch(error => {
                 console.log('ERROR: ', error);
             })
-    }, [])
+    })
 
     return (
         <>

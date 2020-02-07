@@ -84,7 +84,7 @@ const Signup = () => {
 
     const checkEmail = () => {
         console.log("hi")
-        if (errorEmail != []) {
+        if (errorEmail !== []) {
             setErrorMsg(errorEmail[0])
         }
     }
