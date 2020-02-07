@@ -1,13 +1,32 @@
-import React from "react";
-import { Navbar, NavDropdown, Nav, Form } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Navbar, NavDropdown, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import logo from './nextagram.png';
 import Login from './modals/Login'
+import { useHistory } from 'react-router-dom'
 import Signup from './modals/Signup'
 
 
 
 const Navybar = () => {
+
+    const [loggedIn, setLoggedIn] = useState(
+        localStorage.getItem('jwt') !== null
+    )
+
+    let history = useHistory()
+    const loggedOut = () => {
+        localStorage.removeItem('jwt')
+        history.push('/')
+    }
+
+    const display = () =>
+        loggedIn ? <Button variant="secondary" onClick={loggedOut}>
+            Sign Out</Button> :
+            <>
+                <Login />
+                <Signup />
+            </>
 
     return (
         <>
@@ -38,8 +57,7 @@ const Navybar = () => {
                     </Nav>
 
                     <Form inline>
-                        <Login />
-                        <Signup />
+                        {display}
                     </Form>
                 </Navbar.Collapse>
             </Navbar>

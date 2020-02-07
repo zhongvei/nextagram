@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 import Login from "./Login";
+import { toast } from 'react-toastify';
 
 const Signup = () => {
 
@@ -11,7 +12,8 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [passLength, setPassLength] = useState(false);
     const [click, setClick] = useState(false)
-    const [error, setError] = useState([])
+    const [errorEmail, setErrorEmail] = useState([])
+    const [errorMsg, setErrorMsg] = useState('')
     const handleClick = () => setClick(true)
     const handleClicked = () => setClick(false)
     const handlePasswordTrue = () => setPassLength(true);
@@ -82,6 +84,16 @@ const Signup = () => {
     };
 
 
+    const checkEmail = () => {
+        console.log("hi")
+        if (errorEmail != []) {
+            setErrorMsg(errorEmail[0])
+        }
+    }
+
+
+
+
     const displaySubmit = (e) => {
         e.preventDefault()
         console.log(`Submitted Username:${username} ,Submitted Email:${email} ,with password: ${password}`)
@@ -95,12 +107,25 @@ const Signup = () => {
             }
         })
             .then(response => {
-                console.log(response)
+                console.log(response.data)
+                toast.success("Logged in successfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             })
             .catch(error => {
-                console.error(error.response)
+                setErrorEmail([...error.response.data.message])
+                console.log("failed")
             })
     }
+
+    useEffect(() => {
+        checkEmail()
+    }, [errorEmail])
 
     return (
         <>
@@ -118,7 +143,7 @@ const Signup = () => {
                             <Form.Control type="text" placeholder="Enter username" onChange={handleUsername} onFocus={handleClick} onBlur={handleClicked} />
                             {click ?
                                 passLength ? <></> : <>
-                                    {username == "" ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
+                                    {username === "" ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
                                         username.length < 5 ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
                                             <> {usernameValid ? <Form.Text style={{ fontSize: "2em" }}>
                                                 Username Valid!</Form.Text> : <Form.Text style={{ fontSize: "2em" }}>
@@ -128,20 +153,17 @@ const Signup = () => {
                                 <></>
                             }
 
-
-
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} onFocus={handleClick} onBlur={handleClicked} />
                             {click ?
-                                passLength ? <></> : <Form.Text className="text-muted">
-                                    error</Form.Text> :
+                                <Form.Text className="text-muted">
+                                    {errorMsg}
+                                </Form.Text> :
                                 <></>
                             }
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
+
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
@@ -156,7 +178,7 @@ const Signup = () => {
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={displaySubmit}>
+                        <Button variant="primary" type="submit" onClick={displaySubmit} >
                             Submit
                         </Button>
                     </Form>

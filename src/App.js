@@ -3,14 +3,17 @@ import React, { useState, useEffect } from 'react';
 import Loading from './components/Loading.js';
 import './App.css';
 import { Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 import MainPage from './components/Mainpage.js';
 import Navybar from './components/Navbar.js';
 import UserProfilePage from './components/UserProfilePage';
+
 
 function App() {
 
   const [users, setUsers] = useState([])
   const [isLoading, setisLoading] = useState(true);
+
 
   useEffect(() => {
     axios.get('https://insta.nextacademy.com/api/v1/users')
@@ -26,7 +29,9 @@ function App() {
   return (
     isLoading ? <Loading /> :
       <>
+
         <Navybar />
+        <ToastContainer />
         <Route exact path="/" component={() => <MainPage users={users} />} />
         <Route path="/User/:id" component={() => <UserProfilePage users={users} />} />
       </>

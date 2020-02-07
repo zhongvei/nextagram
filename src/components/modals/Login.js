@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 import Signup from './Signup';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom'
+
 
 const Login = () => {
+    let history = useHistory()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const display = (e) => {
         console.log(e.target.value)
     }
 
-    const handleEmail = (e) => {
+    const handleUsername = (e) => {
         display(e)
-        setEmail(e.target.value)
+        setUsername(e.target.value)
     }
     const handlePassword = (e) => {
         display(e)
@@ -25,7 +30,29 @@ const Login = () => {
 
     const displaySubmit = (e) => {
         e.preventDefault()
-        console.log(`Submitted Email:${email} ,with password: ${password}`)
+        console.log(`Submitted username:${username} ,with password: ${password}`)
+        axios({
+            method: 'post',
+            url: 'https://insta.nextacademy.com/api/v1/login',
+            data: {
+                username: username,
+                password: password
+            }
+        })
+            .then(result => {
+                console.log(result)
+                toast.success("Logged in successfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+                localStorage.setItem('jwt', result.data.auth_token)
+                localStorage.getItem('jwt')
+                history.push(`/User/${result.data.user.id}`)
+            })
     }
 
 
@@ -41,11 +68,8 @@ const Login = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Username" onChange={handleUsername} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
