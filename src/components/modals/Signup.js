@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 import Login from "./Login";
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 const Signup = () => {
-
+    let history = useHistory()
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -116,6 +117,9 @@ const Signup = () => {
                     pauseOnHover: true,
                     draggable: true
                 });
+                localStorage.setItem('jwt', response.data.auth_token)
+                localStorage.getItem('jwt')
+                history.push(`/User/${response.data.user.id}`)
             })
             .catch(error => {
                 setErrorEmail([...error.response.data.message])
@@ -145,8 +149,8 @@ const Signup = () => {
                                 passLength ? <></> : <>
                                     {username === "" ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
                                         username.length < 5 ? <p className="text-muted form-text" style={{ fontSize: "0.7em" }}>Enter a username that has 5 characters</p> :
-                                            <> {usernameValid ? <Form.Text style={{ fontSize: "2em" }}>
-                                                Username Valid!</Form.Text> : <Form.Text style={{ fontSize: "2em" }}>
+                                            <> {usernameValid ? <Form.Text style={{ fontSize: "0.7em" }}>
+                                                Username Valid!</Form.Text> : <Form.Text style={{ fontSize: "0.7em" }}>
                                                     Username Invalid!</Form.Text>
                                             }</>}
                                 </> :

@@ -14,7 +14,6 @@ function App() {
   const [users, setUsers] = useState([])
   const [isLoading, setisLoading] = useState(true);
 
-
   useEffect(() => {
     axios.get('https://insta.nextacademy.com/api/v1/users')
       .then(result => {
