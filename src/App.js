@@ -23,6 +23,7 @@ function App() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [address, setAddress] = useState('')
   const display = (e) => {
     console.log(e.target.value)
   }
@@ -35,7 +36,6 @@ function App() {
     display(e)
     setPassword(e.target.value)
   }
-
 
   let history = useHistory()
 
@@ -79,7 +79,8 @@ function App() {
         });
         localStorage.setItem('jwt', result.data.auth_token)
         localStorage.getItem('jwt')
-        history.push(`/User/${result.data.user.id}`)
+        setAddress(`/User/${result.data.user.id}`)
+        history.push(address)
         handleLogIn()
       })
   }
@@ -88,7 +89,7 @@ function App() {
     isLoading ? <Loading /> :
       <>
 
-        <Navybar displaySubmit={displaySubmit} loggedOut={loggedOut} handlePassword={handlePassword} handleUsername={handleUsername} handleShow={handleShow} handleClose={handleClose} show={show} loggedIn={loggedIn} />
+        <Navybar displaySubmit={displaySubmit} loggedOut={loggedOut} handlePassword={handlePassword} handleUsername={handleUsername} handleShow={handleShow} handleClose={handleClose} show={show} loggedIn={loggedIn} address={address} />
         <ToastContainer />
         <Route exact path="/" component={() => <MainPage users={users} />} />
         <Route path="/User/:id" component={() => <UserProfilePage users={users} />} />

@@ -83,7 +83,6 @@ const Signup = () => {
     };
 
     const checkEmail = () => {
-        console.log("hi")
         if (errorEmail !== []) {
             setErrorMsg(errorEmail[0])
         }

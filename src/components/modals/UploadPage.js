@@ -6,6 +6,7 @@ const UploadPage = () => {
     const [image, setImage] = useState(null)
     const [previewImage, setPreviewImage] = useState(null)
     const [message, setMessage] = useState('')
+    const [value, setValue] = useState(null)
 
     const setImageFile = (e) => {
         setPreviewImage(URL.createObjectURL(e.target.files[0]))
@@ -21,11 +22,12 @@ const UploadPage = () => {
             headers: { Authorization: `Bearer ${JWT}` }
         })
             .then(response => {
-                // if (response.data.success) {
-                //     setMessage("Image Uploaded Successfully!")
-                //     setPreviewImage(null)
-                //     setImageFile(null)
-                // }
+                if (response.data.success) {
+                    setMessage("Image Uploaded Successfully!")
+                    setPreviewImage(null)
+                    setImageFile(null)
+                    setValue(null)
+                }
                 console.log(response.data)
             })
             .catch(error => {
@@ -35,13 +37,14 @@ const UploadPage = () => {
 
 
     return (
-        <Form onSubmit={handleSubmitPhoto}>
+        <Form onSubmit={handleSubmitPhoto} className="preview">
             <FormGroup>
                 <input
                     type="file"
                     name="image-file"
                     multiple={false}
                     onChange={setImageFile}
+                    value={value}
                 />
                 <FormText color="muted">
                     Make sure the image being uploaded is a supported format.
@@ -50,8 +53,9 @@ const UploadPage = () => {
                     {previewImage ? (
                         <img
                             src={previewImage}
-                            width="50%"
-                            height="50%"
+                            width="100%"
+                            height="100%"
+                            style={{ padding: "5px", borderRadius: "4%" }}
                         />
                     ) : (
                             <h3 className="text-center">

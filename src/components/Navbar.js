@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import logo from './nextagram.png';
 import Login from './modals/Login';
 import Signup from './modals/Signup';
+import { useHistory } from 'react-router-dom'
 
 
-const Navybar = ({ displaySubmit, loggedOut, handlePassword, handleUsername, handleShow, handleClose, show, loggedIn }) => {
-
+const Navybar = ({ displaySubmit, loggedOut, handlePassword, handleUsername, handleShow, handleClose, show, loggedIn, address }) => {
+    let history = useHistory()
     return (
         <>
             <Navbar bg="dark" variant="dark">
@@ -29,8 +30,9 @@ const Navybar = ({ displaySubmit, loggedOut, handlePassword, handleUsername, han
                     </Nav>
 
                     <Form inline>
-                        {loggedIn ? <Button variant="secondary" onClick={loggedOut}>
-                            Sign Out</Button> :
+                        {loggedIn ? <><Button variant="secondary" onClick={loggedOut}>
+                            Sign Out</Button> <Button variant="secondary" onClick={history.push(address)}>
+                                My Profile</Button></> :
                             <>
                                 <Login displaySubmit={displaySubmit} show={show} handleClose={handleClose} handleShow={handleShow} handleUsername={handleUsername} handlePassword={handlePassword} />
                                 <Signup />

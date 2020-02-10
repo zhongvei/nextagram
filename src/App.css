@@ -153,3 +153,11 @@ html {
     width: 100%;
   }
 }
+
+.preview {
+  width: 60vw;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 30px;
+  border:2px solid rgba(245, 245, 245, 0.411);
+}
