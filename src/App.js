@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Loading from './components/Loading';
-import './App';
+import './App.css';
 import { Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import MainPage from './components/Mainpage';
