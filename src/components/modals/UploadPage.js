@@ -12,7 +12,6 @@ const UploadPage = () => {
         setImage(e.target.files[0])
     }
 
-    console.log(image)
     const handleSubmitPhoto = (e) => {
         e.preventDefault()
         let JWT = localStorage.getItem("jwt");
@@ -41,7 +40,7 @@ const UploadPage = () => {
                 <input
                     type="file"
                     name="image-file"
-                    multiple="false"
+                    multiple={false}
                     onChange={setImageFile}
                 />
                 <FormText color="muted">

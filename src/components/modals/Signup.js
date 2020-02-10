@@ -103,7 +103,7 @@ const Signup = () => {
         })
             .then(response => {
                 console.log(response.data)
-                toast.success("Logged in successfully!", {
+                toast.success("Sign up successfully!", {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -118,6 +118,14 @@ const Signup = () => {
             .catch(error => {
                 setErrorEmail([...error.response.data.message])
                 console.log("failed")
+                toast.error("Sign up Failed!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             })
     }
 

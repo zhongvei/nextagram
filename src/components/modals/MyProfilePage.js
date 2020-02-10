@@ -15,14 +15,13 @@ const MyProfilePage = () => {
             }
         })
             .then(result => {
-                console.log(result)
                 handleSignIn()
             })
             .catch(error => {
                 console.log(error)
                 handleSignOut()
             })
-    })
+    }, [])
     return (
         isUser === true ? <UploadPage /> : <></>
     )
