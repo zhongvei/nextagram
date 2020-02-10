@@ -64,9 +64,6 @@ const UserProfilePage = () => {
                         </Col>
                     </Row>
                 </Container>
-                <Container>
-                    <MyProfilePage />
-                </Container>
             </>
 
     )

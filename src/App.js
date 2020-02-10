@@ -9,6 +9,8 @@ import Navybar from './components/Navbar.js';
 import UserProfilePage from './components/UserProfilePage';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom'
+import MyProfilePage from './components/modals/MyProfilePage'
+import UploadPage from './components/modals/UploadPage.js';
 
 
 function App() {
@@ -23,7 +25,6 @@ function App() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [address, setAddress] = useState('')
   const display = (e) => {
     console.log(e.target.value)
   }
@@ -79,9 +80,20 @@ function App() {
         });
         localStorage.setItem('jwt', result.data.auth_token)
         localStorage.getItem('jwt')
-        setAddress(`/User/${result.data.user.id}`)
-        history.push(address)
+        localStorage.setItem('id', result.data.user.id)
+        history.push(`/User/${result.data.user.id}`)
         handleLogIn()
+      })
+      .catch(error => {
+        console.log("failed")
+        toast.error("Log In Failed!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+        });
       })
   }
 
@@ -89,10 +101,11 @@ function App() {
     isLoading ? <Loading /> :
       <>
 
-        <Navybar displaySubmit={displaySubmit} loggedOut={loggedOut} handlePassword={handlePassword} handleUsername={handleUsername} handleShow={handleShow} handleClose={handleClose} show={show} loggedIn={loggedIn} address={address} />
+        <Navybar displaySubmit={displaySubmit} loggedOut={loggedOut} handlePassword={handlePassword} handleUsername={handleUsername} handleShow={handleShow} handleClose={handleClose} show={show} loggedIn={loggedIn} />
         <ToastContainer />
         <Route exact path="/" component={() => <MainPage users={users} />} />
-        <Route path="/User/:id" component={() => <UserProfilePage users={users} />} />
+        <Route exact path="/User/:id" component={() => <UserProfilePage users={users} />} />
+        <Route exact path="/User/MyProfilePage/UploadImage" component={() => <UploadPage />} />
       </>
   );
 };
