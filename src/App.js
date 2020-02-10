@@ -1,16 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import Loading from './components/Loading.js';
+import Loading from './components/Loading';
 import './App.css';
 import { Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import MainPage from './components/Mainpage.js';
-import Navybar from './components/Navbar.js';
+import MainPage from './components/Mainpage';
+import Navybar from './components/Navbar';
 import UserProfilePage from './components/UserProfilePage';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom'
-import MyProfilePage from './components/modals/MyProfilePage'
-import UploadPage from './components/modals/UploadPage.js';
+import UploadPage from './components/modals/UploadPage';
 
 
 function App() {

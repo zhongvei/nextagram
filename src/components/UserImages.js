@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from "react-graceful-image";
-import Loading from './Loading.js'
+import Loading from './Loading'
 
 const UserImages = ({ userId }) => {
 
