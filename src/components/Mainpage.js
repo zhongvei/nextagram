@@ -19,9 +19,13 @@ const MainPage = ({ users }) => {
                                     alt="Generic placeholder"
                                     className="round"
                                 />
+                                <div class="modal">
+                                    <span>X</span>
+                                    <img src={user.profileImage}></img>
+                                </div>
+                                <div className="modal">hello</div>
                                 <Link to={`/User/${user.id}`} className="Link" >{user.username}</Link>
                             </div>
-
                             <Media.Body>
                                 <UserImages userId={user.id} />
                             </Media.Body>
