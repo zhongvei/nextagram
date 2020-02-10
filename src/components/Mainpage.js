@@ -24,6 +24,7 @@ const MainPage = ({ users }) => {
                             </div>
                             <Media.Body>
                                 <UserImages userId={user.id} />
+
                             </Media.Body>
                         </Media>
                     </Row>
